@@ -29,6 +29,11 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      - name: Create .env file
+      run: |
+        echo "CONNECTION_STRING=${{ secrets.CONNECTION_STRING }}" > .env
+        echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
+
       - name: Build and push Docker images
         run: |
           docker-compose --env-file ./.env build
