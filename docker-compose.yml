@@ -1,0 +1,18 @@
+services:
+  frontend:
+    build: ./frontend
+    image: tesddev/frontend:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    image: tesddev/backend:latest-01
+    ports:
+      - "8001:8001"
+    environment:
+      - NODE_ENV=production
+      - CONNECTION_STRING=mongodb+srv://admin-dec-2024:dev.Senior.1.atlas@cluster0.psq97.mongodb.net/fulcrum?retryWrites=true&w=majority&appName=Cluster0
+      - JWT_SECRET=kjhsbruhtwgrvf74et75yb7fy5bf7ey578y5t7eb4y5beytb7erytenv7tye7rtye8v7eyt7ytetebtvetertvertert
