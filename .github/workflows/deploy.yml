@@ -9,6 +9,9 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
     steps:
       - uses: actions/checkout@v2
 
@@ -20,5 +23,10 @@ jobs:
 
       - name: Build and push Docker images
         run: |
-          docker-compose build
+          docker-compose --env-file ./.env build
           docker-compose push
+
+      - name: Create .env file for deployment
+        run: |
+          echo "CONNECTION_STRING=${{ secrets.CONNECTION_STRING }}" >> .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> .env
