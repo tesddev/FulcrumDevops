@@ -6,6 +6,7 @@ import userRouter from "./routes/userManagement.js";
 import cors from "cors"
 import adminRouter from "./routes/admin.js";
 import productRouter from "./routes/product.js";
+import { checkHealth } from "./controllers/healthCheck.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/product', productRouter);
+app.get('/', checkHealth);
 
 dbConnection()
 app.listen(config.port, () => {
