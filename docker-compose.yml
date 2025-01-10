@@ -9,7 +9,7 @@ services:
 
   backend:
     build: ./backend
-    image: tesddev/backend:latest-01
+    image: tesddev/backend:latest
     ports:
       - "8001:8001"
     environment:
